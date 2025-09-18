@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlatMeals - Meal Planner for Shared Flats</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="FlatMeals" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    
+    <!-- SEO & Social -->
+    <meta name="description" content="Plan meals, reduce chaos, and keep your cook updated. Perfect for shared flats in India." />
+    <meta name="keywords" content="meal planning, shared flat, cook notification, Indian food, Bengaluru, flatmates" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="FlatMeals - Meal Planner for Shared Flats" />
+    <meta property="og:description" content="Plan meals, reduce chaos, and keep your cook updated 🍲" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://flatmeals.vercel.app" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#16a34a" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Preconnect to Supabase -->
+    <link rel="preconnect" href="https://supabase.co" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Register service worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // PWA install prompt
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // You could show a custom install button here
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
